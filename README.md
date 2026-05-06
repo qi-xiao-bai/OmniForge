@@ -1,118 +1,118 @@
 # OmniForge
 
-**多模态 AI 内容创作引擎** — 基于 Xiaomi MiMo-V2.5 系列大模型的多 Agent 协作编排框架
+**Multi-modal AI Content Creation Engine** — Powered by Xiaomi MiMo-V2.5 with multi-agent collaboration framework.
 
-## 核心特性
+## Features
 
-- **多 Agent 协作编排**: 5 个专业 Agent（创意理解、内容规划、多模态生成、质量评估）自主协作
-- **全模态内容生成**: 支持文本、图像、语音合成三大模态的并行生成
-- **智能质量评估**: 判别器机制驱动的迭代优化，确保输出质量
-- **DAG 工作流引擎**: 可视化任务编排，支持复杂创作流程的自动化执行
-- **上下文感知一致性**: 利用 MiMo 长上下文推理能力，确保跨模态内容在情感、风格上高度统一
+- **Multi-Agent Collaboration**: 5 specialized agents (Creative, Planner, Generator, Evaluator) working autonomously
+- **Full Modal Generation**: Parallel generation of text, image, and speech synthesis
+- **Intelligent Quality Evaluation**: Discriminator-driven iterative optimization
+- **DAG Workflow Engine**: Visual task orchestration with automated execution
+- **Context-Aware Consistency**: 128K long-context reasoning ensures consistent emotion and style across modalities
 
-## 快速开始
+## Quick Start
 
-### 前置要求
+### Prerequisites
 
 - Python 3.11+
 - Xiaomi MiMo API Key
 
-### 安装
+### Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/OmniForge.git
+git clone https://github.com/qi-xiao-bai/OmniForge.git
 cd OmniForge
 
 pip install -r requirements.txt
 ```
 
-### 配置
+### Configuration
 
 ```bash
 export MIMO_API_KEY="your-api-key-here"
 export MIMO_BASE_URL="https://api.mimomimo.com/v1"
 ```
 
-### 运行
+### Run
 
 ```bash
 cd src
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-API 文档: http://localhost:8000/docs
+API Docs: http://localhost:8000/docs
 
-### Docker 部署
+### Docker
 
 ```bash
 docker-compose up --build
 ```
 
-## 技术架构
+## Architecture
 
 ```
-用户输入 → 创意理解 Agent (MiMo-V2.5 推理模型)
-         → 内容规划 Agent (MiMo-V2.5 推理模型)
-         → 多模态生成 Agent 集群
-           ├─ 文本创作 Agent (MiMo-V2.5 文本模型)
-           ├─ 图像生成 Agent (MiMo 多模态模型)
-           └─ 语音合成 Agent (MiMo 语音合成模型)
-         → 质量评估 Agent (MiMo-V2.5 推理模型)
-         → 自动化后处理管道
+User Input → Creative Agent (MiMo-V2.5 Reasoning)
+         → Planner Agent (MiMo-V2.5 Reasoning)
+         → Multi-Modal Generator Cluster
+           ├─ Text Agent (MiMo-V2.5 Text)
+           ├─ Image Agent (MiMo Multi-Modal)
+           └─ Speech Agent (MiMo Speech Synthesis)
+         → Evaluator Agent (MiMo-V2.5 Reasoning)
+         → Post-Processing Pipeline
 ```
 
-## API 示例
+## API Examples
 
-### 创建内容创作任务
+### Create Content Task
 
 ```bash
 curl -X POST http://localhost:8000/api/v1/creative \
   -H "Content-Type: application/json" \
   -d '{
-    "brief": "为一档科技产品评测节目创作一期关于最新折叠屏手机的视频内容",
+    "brief": "Create a video about the latest foldable smartphone for a tech review show",
     "content_type": "short_video",
     "style": "professional"
   }'
 ```
 
-### 查询任务状态
+### Check Task Status
 
 ```bash
 curl http://localhost:8000/api/v1/task/{task_id}
 ```
 
-## 系统要求
+## System Requirements
 
-| 组件 | 最低要求 |
-|------|----------|
-| CPU | 2 核 |
-| 内存 | 4 GB |
+| Component | Minimum |
+|-----------|---------|
+| CPU | 2 cores |
+| Memory | 4 GB |
 | Python | 3.11+ |
-| 网络 | 可访问 MiMo API |
+| Network | Access to MiMo API |
 
-## 项目结构
+## Project Structure
 
 ```
 OmniForge/
 ├── src/
-│   ├── main.py                 # FastAPI 应用入口
-│   ├── agents/                  # Agent 实现
-│   │   ├── base.py              # Agent 基类
-│   │   ├── coordinator.py       # 协作编排器
-│   │   ├── creative_agent.py    # 创意理解
-│   │   ├── planner_agent.py     # 内容规划
-│   │   ├── generator_agents.py  # 多模态生成
-│   │   └── evaluator_agent.py   # 质量评估
-│   ├── core/                    # 核心模块
-│   │   ├── mimo_client.py       # MiMo API 客户端
-│   │   ├── message_bus.py       # 消息总线
-│   │   └── workflow_engine.py   # DAG 工作流
-│   ├── api/                     # API 层
-│   │   ├── routes.py            # 路由定义
-│   │   └── schemas.py           # 数据模型
-│   └── services/                # 业务服务
-├── tests/                       # 测试套件
-├── docs/                        # 架构文档
+│   ├── main.py                 # FastAPI entry point
+│   ├── agents/                  # Agent implementations
+│   │   ├── base.py              # Agent base class
+│   │   ├── coordinator.py       # Collaboration orchestrator
+│   │   ├── creative_agent.py    # Creative understanding
+│   │   ├── planner_agent.py     # Content planning
+│   │   ├── generator_agents.py  # Multi-modal generation
+│   │   └── evaluator_agent.py   # Quality evaluation
+│   ├── core/                    # Core modules
+│   │   ├── mimo_client.py       # MiMo API client
+│   │   ├── message_bus.py       # Message bus
+│   │   └── workflow_engine.py   # DAG workflow
+│   ├── api/                     # API layer
+│   │   ├── routes.py            # Route definitions
+│   │   └── schemas.py           # Data models
+│   └── services/                # Business services
+├── tests/                       # Test suite
+├── docs/                        # Architecture docs
 ├── docker-compose.yml
 ├── Dockerfile
 └── requirements.txt
